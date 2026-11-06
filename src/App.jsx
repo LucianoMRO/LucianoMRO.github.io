@@ -1,6 +1,6 @@
-
 import Header from './Components/Header';
 import './App.css';
+import banner from './assets/banner.png';
 
 function App() {
   return (
@@ -8,18 +8,16 @@ function App() {
       <Header />
 
       <main>
-        <section id="inicio" className="hero">
+        <section className="hero">
           <p>OLÁ, MEU NOME É LUCIANO</p>
 
-          <h1>
-            Desenvolvedor <span>Front-end</span>
-            em formação.
-          </h1>
+          <h1>Desenvolvedor Front-end em formação.</h1>
 
           <p>
-            Estou aprendendo a desenvolver aplicações web
-            utilizando React e tecnologias modernas.
+            Estou aprendendo a criar aplicações web com React.
           </p>
+
+          <img src={banner} alt="Ambiente de programação" />
         </section>
 
         <section id="sobre">
