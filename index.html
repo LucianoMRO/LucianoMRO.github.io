@@ -1,13 +1,189 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title> Portifolio Luciano </title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta name="description" content="Portfólio pessoal de Luciano MRO. Estudante de programação, desenvolvimento web e inteligência artificial.">
+  <meta name="theme-color" content="#07050b">
+
+  <title>Luciano MRO | Portfólio</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  >
+
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+
+<body>
+
+  <!-- VÍDEO DE BACKGROUND -->
+  <div class="video-background" aria-hidden="true">
+
+    <video
+      autoplay
+      muted
+      loop
+      playsinline
+      preload="metadata"
+      poster="assets/images/background-poster.jpg"
+    >
+      <source src="assets/videos/background.mp4" type="video/mp4">
+    </video>
+
+    <!-- Camada escura sobre o vídeo -->
+    <div class="video-overlay"></div>
+
+  </div>
+
+  <!-- CONTEÚDO PRINCIPAL -->
+  <main class="container">
+
+    <!-- PERFIL -->
+    <section class="profile">
+
+      <div class="profile-image">
+        <img
+          src="https://github.com/LucianoMRO.png?size=240"
+          alt="Foto de perfil de Luciano no GitHub"
+          width="120"
+          height="120"
+          fetchpriority="high"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"
+        >
+
+        <span class="fallback" style="display:none">L</span>
+      </div>
+
+      <div class="status">
+        <span class="status-dot"></span>
+        Disponível para oportunidades
+      </div>
+
+      <h1>LUCIANO <span>MRO</span></h1>
+
+      <p class="subtitle">Estudante de Programação</p>
+
+      <p class="description">
+        Explorando o universo da tecnologia, desenvolvimento web
+        e inteligência artificial. Construindo projetos e evoluindo
+        constantemente como profissional.
+      </p>
+
+      <!-- REDES SOCIAIS -->
+      <div class="social-links">
+
+        <a
+          href="https://github.com/LucianoMRO"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="social-link"
+        >
+          <span>GH</span>
+          GitHub
+        </a>
+
+        <a
+          href="https://www.linkedin.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="social-link"
+        >
+          <span>in</span>
+          LinkedIn
+        </a>
+
+        <a
+          href="https://www.instagram.com/luciano.tech2026/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="social-link"
+        >
+          <span>IG</span>
+          Instagram
+        </a>
+
+      </div>
+
+    </section>
+
+    <!-- TECNOLOGIAS -->
+    <section class="section">
+
+      <div class="section-heading">
+        <span class="section-line"></span>
+        <h2>TECNOLOGIAS</h2>
+        <span class="section-line"></span>
+      </div>
+
+      <div class="tech-list">
+        <span class="tech">HTML5</span>
+        <span class="tech">CSS3</span>
+        <span class="tech">JavaScript</span>
+        <span class="tech">React</span>
+        <span class="tech">Git</span>
+        <span class="tech">Inteligência Artificial</span>
+      </div>
+
+    </section>
+
+    <!-- PROJETOS -->
+    <section class="section">
+
+      <div class="section-heading">
+        <span class="section-line"></span>
+        <h2>MEUS PROJETOS</h2>
+        <span class="section-line"></span>
+      </div>
+
+      <div class="projects-grid" id="projects-container">
+        <!-- Projetos inseridos pelo JavaScript -->
+      </div>
+
+      <p class="project-counter">
+        <span id="project-count">0</span> projetos apresentados
+      </p>
+
+    </section>
+
+    <!-- CONTATO -->
+    <section class="contact">
+
+      
+
+      <h2>VAMOS CONSTRUIR ALGO?</h2>
+
+      <p>
+        Estou aberto a oportunidades, conexões e novos desafios
+        na área de tecnologia.
+      </p>
+
+      <a
+        href="https://github.com/LucianoMRO"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="contact-button"
+      >
+        Conheça meu GitHub
+        <span>↗</span>
+      </a>
+
+    </section>
+
+    <!-- RODAPÉ -->
+    <footer>
+      <p>Desenvolvido por <strong>Luciano MRO</strong></p>
+      <p>© <span id="current-year"></span> · Todos os direitos reservados.</p>
+    </footer>
+
+  </main>
+
+</body>
 </html>

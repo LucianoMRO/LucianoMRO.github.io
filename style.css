@@ -1,0 +1,758 @@
+
+/* =====================================
+   CONFIGURAÇÕES GERAIS
+===================================== */
+
+:root {
+  --bg: #07050b;
+  --surface: rgba(16, 11, 24, 0.88);
+  --surface-hover: #1a1028;
+
+  --purple: #8b2bff;
+  --purple-light: #b66bff;
+  --purple-dark: #451080;
+
+  --white: #f8f5fc;
+  --muted: #b0a5bb;
+
+  --border: rgba(160, 75, 255, 0.25);
+  --glow: rgba(139, 43, 255, 0.2);
+
+  --radius: 18px;
+  --transition: 0.3s ease;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  position: relative;
+  isolation: isolate;
+  overflow-x: hidden;
+
+  background: var(--bg);
+  color: var(--white);
+
+  font-family: "Inter", sans-serif;
+}
+
+/* =====================================
+   VÍDEO DE BACKGROUND
+===================================== */
+
+.video-background {
+  position: fixed;
+  inset: 0;
+
+  width: 100%;
+  height: 100vh;
+
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+
+  background: #07050b;
+}
+
+.video-background video {
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+  object-position: center;
+
+  opacity: 0.65;
+}
+
+/* Camada escura e roxa */
+
+.video-overlay {
+  position: absolute;
+  inset: 0;
+
+  z-index: 1;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(7, 5, 11, 0.65) 0%,
+      rgba(7, 5, 11, 0.78) 50%,
+      rgba(7, 5, 11, 0.92) 100%
+    ),
+    radial-gradient(
+      circle at 50% 35%,
+      rgba(91, 19, 181, 0.22),
+      transparent 65%
+    );
+}
+
+/* Textura tecnológica */
+
+body::before {
+  content: "";
+
+  position: fixed;
+  inset: 0;
+
+  z-index: -1;
+  pointer-events: none;
+
+  background-image:
+    linear-gradient(
+      rgba(139, 43, 255, 0.025) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(139, 43, 255, 0.025) 1px,
+      transparent 1px
+    );
+
+  background-size: 55px 55px;
+}
+
+/* =====================================
+   ANIMAÇÕES
+===================================== */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(139, 43, 255, 0.4);
+  }
+
+  50% {
+    box-shadow: 0 0 0 6px rgba(139, 43, 255, 0);
+  }
+}
+
+/* =====================================
+   CONTEÚDO PRINCIPAL
+===================================== */
+
+.container {
+  position: relative;
+  z-index: 1;
+
+  width: min(100% - 40px, 760px);
+
+  margin: 0 auto;
+  padding: 75px 0 35px;
+}
+
+/* =====================================
+   PERFIL
+===================================== */
+
+.profile {
+  text-align: center;
+  animation: fadeIn 0.8s ease both;
+}
+
+.profile-image {
+  width: 125px;
+  height: 125px;
+
+  margin: 0 auto 22px;
+  padding: 4px;
+
+  border-radius: 50%;
+
+  background: linear-gradient(
+    135deg,
+    var(--purple-light),
+    var(--purple-dark)
+  );
+
+  box-shadow:
+    0 0 25px rgba(139, 43, 255, 0.35),
+    0 0 60px rgba(139, 43, 255, 0.12);
+
+  overflow: hidden;
+}
+
+.profile-image img {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  border-radius: 50%;
+  object-fit: cover;
+
+  background: var(--surface);
+}
+
+.fallback {
+  width: 100%;
+  height: 100%;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: var(--surface);
+  color: var(--purple-light);
+
+  font-size: 45px;
+  font-weight: 800;
+}
+
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+
+  padding: 8px 14px;
+  margin-bottom: 20px;
+
+  border: 1px solid var(--border);
+  border-radius: 30px;
+
+  background: rgba(139, 43, 255, 0.1);
+
+  color: var(--purple-light);
+
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.status-dot {
+  width: 7px;
+  height: 7px;
+
+  border-radius: 50%;
+  background: #a855f7;
+
+  animation: pulse 2s infinite;
+}
+
+.profile h1 {
+  font-size: clamp(32px, 6vw, 48px);
+  font-weight: 800;
+  letter-spacing: 3px;
+}
+
+.profile h1 span {
+  color: var(--purple-light);
+
+  text-shadow:
+    0 0 25px rgba(139, 43, 255, 0.4);
+}
+
+.subtitle {
+  margin-top: 10px;
+
+  color: var(--purple-light);
+
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.description {
+  max-width: 510px;
+
+  margin: 18px auto 25px;
+
+  color: var(--muted);
+
+  font-size: 14px;
+  line-height: 1.9;
+}
+
+/* =====================================
+   REDES SOCIAIS
+===================================== */
+
+.social-links {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.social-link {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+
+  padding: 12px 17px;
+
+  border: 1px solid var(--border);
+  border-radius: 12px;
+
+  background: rgba(17, 13, 25, 0.85);
+
+  color: var(--white);
+  text-decoration: none;
+
+  font-size: 13px;
+  font-weight: 600;
+
+  transition: var(--transition);
+}
+
+.social-link span {
+  color: var(--purple-light);
+  font-weight: 800;
+}
+
+.social-link:hover {
+  transform: translateY(-4px);
+
+  border-color: var(--purple);
+  background: var(--surface-hover);
+
+  box-shadow: 0 8px 25px var(--glow);
+}
+
+/* =====================================
+   SEÇÕES
+===================================== */
+
+.section {
+  margin-top: 65px;
+  animation: fadeIn 0.8s ease both;
+}
+
+.section-heading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+
+  margin-bottom: 25px;
+}
+
+.section-heading h2 {
+  color: var(--white);
+
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 3px;
+
+  white-space: nowrap;
+}
+
+.section-line {
+  width: 55px;
+  height: 1px;
+
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--purple)
+  );
+}
+
+.section-line:last-child {
+  transform: rotate(180deg);
+}
+
+/* =====================================
+   TECNOLOGIAS
+===================================== */
+
+.tech-list {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 11px;
+}
+
+.tech {
+  padding: 11px 16px;
+
+  border: 1px solid var(--border);
+  border-radius: 10px;
+
+  background: rgba(17, 13, 25, 0.88);
+
+  color: #d7c7e9;
+
+  font-size: 12px;
+  font-weight: 600;
+
+  transition: var(--transition);
+}
+
+.tech:hover {
+  border-color: var(--purple);
+  color: var(--purple-light);
+
+  transform: translateY(-3px);
+
+  box-shadow: 0 5px 20px var(--glow);
+}
+
+/* =====================================
+   PROJETOS
+===================================== */
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.project-card {
+  overflow: hidden;
+
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+
+  background: rgba(16, 11, 24, 0.92);
+
+  transition: var(--transition);
+}
+
+.project-card:hover {
+  transform: translateY(-6px);
+
+  border-color: var(--purple);
+
+  box-shadow:
+    0 12px 35px rgba(139, 43, 255, 0.18);
+}
+
+.project-image {
+  width: 100%;
+  height: 155px;
+
+  display: block;
+
+  object-fit: cover;
+  background: #170d25;
+}
+
+.project-content {
+  padding: 19px;
+}
+
+.project-content h3 {
+  margin-bottom: 9px;
+
+  color: var(--white);
+  font-size: 16px;
+}
+
+.project-content p {
+  min-height: 60px;
+
+  color: var(--muted);
+
+  font-size: 12px;
+  line-height: 1.8;
+}
+
+.project-technologies {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+
+  margin: 15px 0;
+}
+
+.project-technologies span {
+  padding: 6px 9px;
+
+  border-radius: 6px;
+
+  background: rgba(139, 43, 255, 0.12);
+
+  color: var(--purple-light);
+
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.project-links {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.project-links a {
+  flex: 1;
+
+  padding: 10px;
+
+  border: 1px solid var(--border);
+  border-radius: 8px;
+
+  color: var(--white);
+  text-decoration: none;
+  text-align: center;
+
+  font-size: 11px;
+  font-weight: 600;
+
+  transition: var(--transition);
+}
+
+.project-links a:hover {
+  border-color: var(--purple);
+  background: rgba(139, 43, 255, 0.13);
+}
+
+.project-counter {
+  margin-top: 20px;
+
+  color: var(--muted);
+
+  text-align: center;
+  font-size: 11px;
+}
+
+.project-counter span {
+  color: var(--purple-light);
+  font-weight: 700;
+}
+
+/* =====================================
+   CONTATO
+===================================== */
+
+.contact {
+  margin-top: 75px;
+  padding: 35px 25px;
+
+  border: 1px solid var(--border);
+  border-radius: 20px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(139, 43, 255, 0.12),
+      rgba(16, 11, 24, 0.94)
+    );
+
+  text-align: center;
+
+  animation: fadeIn 1s ease both;
+}
+
+.contact-icon {
+  margin-bottom: 15px;
+
+  color: var(--purple-light);
+  font-size: 30px;
+}
+
+.contact h2 {
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.contact p {
+  max-width: 430px;
+
+  margin: 13px auto 22px;
+
+  color: var(--muted);
+
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+.contact-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+
+  padding: 13px 22px;
+
+  border-radius: 10px;
+
+  background: linear-gradient(
+    135deg,
+    #8b2bff,
+    #5c13b5
+  );
+
+  color: white;
+  text-decoration: none;
+
+  font-size: 13px;
+  font-weight: 700;
+
+  box-shadow: 0 5px 25px rgba(139, 43, 255, 0.25);
+
+  transition: var(--transition);
+}
+
+.contact-button:hover {
+  transform: translateY(-4px);
+
+  box-shadow: 0 8px 30px rgba(139, 43, 255, 0.45);
+}
+
+/* =====================================
+   RODAPÉ
+===================================== */
+
+footer {
+  margin-top: 55px;
+  padding-top: 25px;
+
+  border-top: 1px solid var(--border);
+
+  text-align: center;
+}
+
+footer p {
+  margin: 7px 0;
+
+  color: var(--muted);
+  font-size: 11px;
+}
+
+footer strong {
+  color: var(--purple-light);
+}
+
+/* =====================================
+   RESPONSIVIDADE
+===================================== */
+
+@media (max-width: 600px) {
+
+  .container {
+    width: min(100% - 30px, 760px);
+    padding-top: 50px;
+  }
+
+  .profile h1 {
+    font-size: 34px;
+  }
+
+  .description {
+    font-size: 13px;
+  }
+
+  .social-links {
+    gap: 8px;
+  }
+
+  .social-link {
+    padding: 10px 12px;
+    font-size: 11px;
+  }
+
+  .section {
+    margin-top: 50px;
+  }
+
+  .section-heading h2 {
+    font-size: 11px;
+    letter-spacing: 2px;
+  }
+
+  .section-line {
+    width: 30px;
+  }
+
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .project-image {
+    height: 190px;
+  }
+
+  .contact {
+    padding: 30px 18px;
+  }
+
+  .video-background video {
+    object-position: center;
+    opacity: 0.4;
+  }
+}
+
+/* =====================================
+   ACESSIBILIDADE
+===================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation: none !important;
+    transition: none !important;
+  }
+
+  
+/* VÍDEO MAIS VISÍVEL */
+
+.video-background video {
+  opacity: 1;
+  filter: brightness(0.2);
+}
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+  object-position: center;
+
+  opacity: 1;
+}
+
+/* CAMADA ESCURA MAIS SUAVE */
+
+.video-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(7, 5, 11, 0.12) 0%,
+      rgba(7, 5, 11, 0.22) 55%,
+      rgba(7, 5, 11, 0.32) 100%
+    ),
+    radial-gradient(
+      circle at 50% 35%,
+      rgba(91, 19, 181, 0.10),
+      transparent 70%
+    );
+}
+
+/* CELULAR */
+
+@media (max-width: 600px) {
+  .video-background video {
+    opacity: 1;
+  }
+
+  .video-overlay {
+    background: rgba(7, 5, 11, 0.40);
+  }
+}
