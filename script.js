@@ -19,7 +19,7 @@ const projects = [
       "React"
     ],
 
-    github: "https://github.com/LucianoMRO",
+    github: "https://github.com/LucianoMRO/CLIMATECH",
 
     demo: ""
   },
@@ -38,7 +38,7 @@ const projects = [
       "JavaScript"
     ],
 
-    github: "https://github.com/LucianoMRO",
+    github: "https://github.com/LucianoMRO/traveltech"
 
     demo: ""
   }
