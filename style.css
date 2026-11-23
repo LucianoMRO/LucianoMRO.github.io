@@ -185,3 +185,22 @@ footer{margin-top:8px;padding:25px 5px 34px;line-height:1.8;letter-spacing:.5px}
   .social-heading{flex-wrap:wrap}
   .social-heading small{margin-left:0;width:100%}
 }
+
+/* Foto de perfil circular, sem bordas ou molduras */
+.avatar-frame{
+  padding:0 !important;
+  background:transparent !important;
+  border:0 !important;
+  box-shadow:none !important;
+  outline:0 !important;
+  overflow:hidden;
+}
+.github-avatar{
+  border:0 !important;
+  outline:0 !important;
+  box-shadow:none !important;
+  border-radius:50% !important;
+  clip-path:circle(50% at 50% 50%);
+}
+/* Remove o aro decorativo ao redor da foto */
+.hero-ring{display:none !important;}
