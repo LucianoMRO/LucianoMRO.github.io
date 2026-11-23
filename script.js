@@ -18,7 +18,8 @@ projects.forEach(project=>{
 });
 function makePlaceholder(){const el=document.createElement("div");el.className="project-placeholder";el.textContent="</>";return el}
 document.querySelector("#project-count").textContent=projects.length;
-document.querySelector("#current-year").textContent=new Date().getFullYear();
+const currentYear=document.querySelector("#current-year");
+if(currentYear) currentYear.textContent=new Date().getFullYear();
 
 document.addEventListener("click",event=>{
  const btn=event.target.closest(".btn,.social-row a,.top-github");
