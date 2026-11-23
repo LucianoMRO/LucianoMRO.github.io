@@ -1,141 +1,316 @@
+
+/* =====================================
+   PROJETOS DO PORTFÓLIO
+===================================== */
+
 const projects = [
   {
     name: "Climatech",
-    category: "CLIMA & TECNOLOGIA",
-    description: "Aplicação de clima com previsão meteorológica, pesquisa de cidades e interface dinâmica.",
+
+    description:
+      "Aplicação de clima com previsão meteorológica, pesquisa de cidades e interface dinâmica.",
+
     image: "assets/images/climatech.png",
-    imageAlt: "Prévia do projeto Climatech",
-    technologies: ["HTML", "CSS", "JavaScript", "React"],
+
+    technologies: [
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "React"
+    ],
+
     github: "https://github.com/LucianoMRO/CLIMATECH",
+
     demo: ""
   },
+
   {
     name: "Travel Tech",
-    category: "EXPERIÊNCIA DIGITAL",
-    description: "Projeto voltado à tecnologia e a experiências digitais para quem gosta de explorar novos destinos.",
-    image: "assets/images/travel-tech.svg",
-    imageAlt: "Ilustração do projeto Travel Tech",
-    technologies: ["HTML", "CSS", "JavaScript"],
+
+    description:
+      "Projeto voltado à tecnologia e experiências digitais para viagens.",
+
+    image: "assets/images/travel-tech.png",
+
+    technologies: [
+      "HTML",
+      "CSS",
+      "JavaScript"
+    ],
+
     github: "https://github.com/LucianoMRO/traveltech",
+
     demo: ""
   }
 ];
 
-const projectsContainer = document.querySelector("#projects-container");
+/* =====================================
+   RENDERIZAÇÃO DOS PROJETOS
+===================================== */
 
-function createProjectCard(project, index) {
-  const card = document.createElement("article");
-  card.className = "project-card reveal";
-  card.style.setProperty("--card-index", index);
+const projectsContainer = document.querySelector(
+  "#projects-container"
+);
 
-  const media = document.createElement("div");
-  media.className = "project-media";
-  const image = document.createElement("img");
-  image.src = project.image;
-  image.alt = project.imageAlt;
-  image.loading = "lazy";
-  image.decoding = "async";
-  image.onerror = () => {
-    image.remove();
-    media.classList.add("project-media-fallback");
-    const fallback = document.createElement("span");
-    fallback.textContent = project.name === "Climatech" ? "CLIMATECH" : "TRAVEL TECH";
-    media.append(fallback);
-  };
-  media.append(image);
+function renderProjects() {
 
-  const body = document.createElement("div");
-  body.className = "project-body";
-  const top = document.createElement("div");
-  top.className = "project-topline";
-  const category = document.createElement("span");
-  category.textContent = project.category;
-  const number = document.createElement("span");
-  number.textContent = `0${index + 1}`;
-  top.append(category, number);
+  if (!projectsContainer) return;
 
-  const title = document.createElement("h3");
-  title.textContent = project.name;
-  const description = document.createElement("p");
-  description.textContent = project.description;
+  const fragment = document.createDocumentFragment();
 
-  const tags = document.createElement("div");
-  tags.className = "project-tags";
-  project.technologies.forEach((tech) => {
-    const tag = document.createElement("span");
-    tag.textContent = tech;
-    tags.append(tag);
+  projects.forEach((project) => {
+
+    const card = document.createElement("article");
+    card.className = "project-card";
+
+    // Imagem
+    const image = document.createElement("img");
+
+    image.className = "project-image";
+    image.src = project.image;
+    image.alt = `Imagem do projeto ${project.name}`;
+    image.loading = "lazy";
+    image.decoding = "async";
+
+    image.addEventListener("error", () => {
+      image.style.display = "none";
+    });
+
+    // Conteúdo
+    const content = document.createElement("div");
+    content.className = "project-content";
+
+    const title = document.createElement("h3");
+    title.textContent = project.name;
+
+    const description = document.createElement("p");
+    description.textContent = project.description;
+
+    // Tecnologias
+    const technologies = document.createElement("div");
+    technologies.className = "project-technologies";
+
+    project.technologies.forEach((technology) => {
+
+      const tag = document.createElement("span");
+
+      tag.textContent = technology;
+
+      technologies.appendChild(tag);
+
+    });
+
+    // Links
+    const links = document.createElement("div");
+    links.className = "project-links";
+
+    const githubLink = document.createElement("a");
+
+    githubLink.href = project.github;
+    githubLink.target = "_blank";
+    githubLink.rel = "noopener noreferrer";
+    githubLink.textContent = "GitHub ↗";
+
+    links.appendChild(githubLink);
+
+    if (project.demo) {
+
+      const demoLink = document.createElement("a");
+
+      demoLink.href = project.demo;
+      demoLink.target = "_blank";
+      demoLink.rel = "noopener noreferrer";
+      demoLink.textContent = "Visualizar ↗";
+
+      links.appendChild(demoLink);
+
+    }
+
+    content.append(
+      title,
+      description,
+      technologies,
+      links
+    );
+
+    card.append(
+      image,
+      content
+    );
+
+    fragment.appendChild(card);
+
   });
 
-  const links = document.createElement("div");
-  links.className = "project-links";
-  const github = document.createElement("a");
-  github.href = project.github;
-  github.target = "_blank";
-  github.rel = "noopener noreferrer";
-  github.textContent = "Código no GitHub ↗";
-  links.append(github);
-  if (project.demo) {
-    const demo = document.createElement("a");
-    demo.href = project.demo;
-    demo.target = "_blank";
-    demo.rel = "noopener noreferrer";
-    demo.textContent = "Ver projeto ↗";
-    links.append(demo);
+  projectsContainer.appendChild(fragment);
+
+  const projectCount = document.querySelector("#project-count");
+
+  if (projectCount) {
+    projectCount.textContent = projects.length;
   }
 
-  body.append(top, title, description, tags, links);
-  card.append(media, body);
-  return card;
 }
 
-if (projectsContainer) {
-  projects.forEach((project, index) => projectsContainer.append(createProjectCard(project, index)));
-  document.querySelector("#project-count").textContent = projects.length;
+/* =====================================
+   ANO AUTOMÁTICO
+===================================== */
+
+const currentYear = document.querySelector("#current-year");
+
+if (currentYear) {
+  currentYear.textContent = new Date().getFullYear();
 }
 
-const year = document.querySelector("#current-year");
-if (year) year.textContent = new Date().getFullYear();
+/* =====================================
+   INICIALIZAÇÃO
+===================================== */
 
-const menuToggle = document.querySelector("#menu-toggle");
-const navLinks = document.querySelector("#nav-links");
+renderProjects();
 
-function closeMenu() {
-  menuToggle?.setAttribute("aria-expanded", "false");
-  menuToggle?.setAttribute("aria-label", "Abrir menu");
-  navLinks?.classList.remove("is-open");
-  document.body.classList.remove("menu-open");
+
+/* =====================================
+   REPOSITÓRIOS DO GITHUB
+   Os dados são carregados automaticamente
+   pela API pública do GitHub.
+===================================== */
+
+const repositoriesContainer = document.querySelector("#repositories-container");
+const repositorySearch = document.querySelector("#repository-search");
+const repositoryTotal = document.querySelector("#repository-total");
+
+let githubRepositories = [];
+
+function formatRepositoryDate(date) {
+  if (!date) return "";
+  return new Intl.DateTimeFormat("pt-BR", {
+    day: "2-digit",
+    month: "short",
+    year: "numeric"
+  }).format(new Date(date));
 }
 
-menuToggle?.addEventListener("click", () => {
-  const isOpen = menuToggle.getAttribute("aria-expanded") === "true";
-  menuToggle.setAttribute("aria-expanded", String(!isOpen));
-  menuToggle.setAttribute("aria-label", isOpen ? "Abrir menu" : "Fechar menu");
-  navLinks.classList.toggle("is-open", !isOpen);
-  document.body.classList.toggle("menu-open", !isOpen);
-});
-navLinks?.querySelectorAll("a").forEach((link) => link.addEventListener("click", closeMenu));
-document.addEventListener("keydown", (event) => {
-  if (event.key === "Escape") closeMenu();
-});
+function renderRepositories(searchTerm = "") {
+  if (!repositoriesContainer) return;
 
-const backToTop = document.querySelector("#back-to-top");
-window.addEventListener("scroll", () => {
-  backToTop?.classList.toggle("is-visible", window.scrollY > 500);
-}, { passive: true });
-backToTop?.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
+  const term = searchTerm.trim().toLowerCase();
+  const filtered = githubRepositories.filter((repo) => {
+    const searchable = `${repo.name} ${repo.description || ""} ${repo.language || ""}`.toLowerCase();
+    return searchable.includes(term);
+  });
 
-const revealItems = document.querySelectorAll(".reveal");
-if ("IntersectionObserver" in window && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-  const observer = new IntersectionObserver((entries, currentObserver) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("is-visible");
-        currentObserver.unobserve(entry.target);
+  repositoriesContainer.replaceChildren();
+
+  if (repositoryTotal) {
+    repositoryTotal.textContent = `${filtered.length} de ${githubRepositories.length} repositórios`;
+  }
+
+  if (!filtered.length) {
+    const message = document.createElement("div");
+    message.className = "repositories-message";
+    message.textContent = term
+      ? "Nenhum repositório encontrado para essa busca."
+      : "Nenhum repositório público encontrado.";
+    repositoriesContainer.appendChild(message);
+    return;
+  }
+
+  const fragment = document.createDocumentFragment();
+
+  filtered.forEach((repo) => {
+    const card = document.createElement("article");
+    card.className = "repository-card";
+
+    const top = document.createElement("div");
+    top.className = "repository-card-top";
+
+    const icon = document.createElement("span");
+    icon.className = "repository-icon";
+    icon.setAttribute("aria-hidden", "true");
+    icon.textContent = "</>";
+
+    const title = document.createElement("h3");
+    title.textContent = repo.name;
+
+    top.append(icon, title);
+
+    const description = document.createElement("p");
+    description.className = "repository-description";
+    description.textContent = repo.description || "Sem descrição adicionada a este repositório.";
+
+    const details = document.createElement("div");
+    details.className = "repository-details";
+
+    if (repo.language) {
+      const language = document.createElement("span");
+      language.className = "repository-language";
+      language.textContent = repo.language;
+      details.appendChild(language);
+    }
+
+    const stars = document.createElement("span");
+    stars.textContent = `★ ${repo.stargazers_count}`;
+    details.appendChild(stars);
+
+    const forks = document.createElement("span");
+    forks.textContent = `⑂ ${repo.forks_count}`;
+    details.appendChild(forks);
+
+    const updated = document.createElement("span");
+    updated.textContent = `Atualizado ${formatRepositoryDate(repo.updated_at)}`;
+    details.appendChild(updated);
+
+    const link = document.createElement("a");
+    link.className = "repository-link";
+    link.href = repo.html_url;
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
+    link.textContent = "Abrir repositório ↗";
+    link.setAttribute("aria-label", `Abrir o repositório ${repo.name} no GitHub`);
+
+    card.append(top, description, details, link);
+    fragment.appendChild(card);
+  });
+
+  repositoriesContainer.appendChild(fragment);
+}
+
+async function loadGithubRepositories() {
+  if (!repositoriesContainer) return;
+
+  try {
+    const response = await fetch(
+      "https://api.github.com/users/LucianoMRO/repos?per_page=100&sort=updated",
+      { headers: { Accept: "application/vnd.github+json" } }
+    );
+
+    if (!response.ok) {
+      if (response.status === 403 || response.status === 429) {
+        throw new Error("O GitHub limitou temporariamente as consultas. Tente novamente mais tarde.");
       }
-    });
-  }, { threshold: 0.12 });
-  revealItems.forEach((item) => observer.observe(item));
-} else {
-  revealItems.forEach((item) => item.classList.add("is-visible"));
+      throw new Error("Não foi possível carregar os repositórios agora.");
+    }
+
+    const data = await response.json();
+    githubRepositories = data
+      .filter((repo) => !repo.fork)
+      .sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at));
+
+    renderRepositories(repositorySearch ? repositorySearch.value : "");
+  } catch (error) {
+    repositoriesContainer.replaceChildren();
+    const message = document.createElement("div");
+    message.className = "repositories-message repositories-error";
+    message.textContent = error.message;
+    repositoriesContainer.appendChild(message);
+    if (repositoryTotal) repositoryTotal.textContent = "GitHub indisponível";
+  }
 }
+
+if (repositorySearch) {
+  repositorySearch.addEventListener("input", (event) => {
+    renderRepositories(event.target.value);
+  });
+}
+
+loadGithubRepositories();
