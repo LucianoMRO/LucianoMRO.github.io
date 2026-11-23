@@ -92,3 +92,96 @@ body:after{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;opaci
   border-radius:50% !important;
   clip-path:circle(50% at 50% 50%);
 }
+
+
+/* =========================================
+   AJUSTES DE LEITURA E ORGANIZACAO VISUAL
+   ========================================= */
+/* Reduz elementos que competem com o conteudo */
+.noise,.scanlines{display:none!important}
+.lightning{display:none!important}
+body:before{opacity:.22;background:radial-gradient(ellipse at 50% 0%,rgba(100,0,170,.13),transparent 48%)}
+body:after{opacity:.12!important;animation:none!important}
+
+/* Conteudo centralizado e com largura confortavel */
+.wrap{width:min(1080px,90vw);margin:0 auto}
+.hero{min-height:350px;padding:64px clamp(18px,4vw,48px);border-bottom:1px solid rgba(163,40,255,.24)}
+.hero-copy{max-width:58%;}
+.hero h1{line-height:1.08;letter-spacing:-3px}
+.hello{margin-bottom:12px}
+
+/* Paineis mais definidos, sem recortes que deixam o layout fragmentado */
+.panel{clip-path:none;border-radius:16px;padding:30px;background:linear-gradient(145deg,rgba(20,12,31,.98),rgba(10,7,17,.98));border:1px solid rgba(173,55,255,.34);box-shadow:0 12px 32px rgba(0,0,0,.22),inset 0 1px rgba(255,255,255,.025)}
+.panel:hover{transform:translateY(-2px);box-shadow:0 14px 34px rgba(0,0,0,.28),0 0 18px rgba(145,0,255,.12)}
+.panel:before{left:24px;right:24px;border-radius:10px;opacity:.5}
+.intro-grid{gap:22px;margin:26px 0}
+.social-hub{margin:24px 0 26px;padding:25px 30px}
+.projects-panel{margin-bottom:26px}
+.bottom-grid{gap:22px;margin-bottom:26px}
+
+/* Tipografia com hierarquia e ritmo de leitura */
+.panel-title{gap:13px;margin-bottom:22px}
+.panel-title h2,.social-heading h2{font-size:clamp(17px,1.8vw,20px);line-height:1.35;letter-spacing:-.25px}
+.about-panel>p,.repo-panel p,.contact-panel p{max-width:62ch;font-size:15px;line-height:1.9;color:#d0c4dc;letter-spacing:.05px}
+.facts{gap:12px 22px;margin-top:24px;line-height:1.8}
+.tech-list{gap:18px}
+.tech{gap:10px;line-height:1.5}
+.tech span{font-size:13px;font-weight:600}
+.tech b{width:62px;height:62px;border-radius:14px}
+
+/* Projetos e repositorios com texto mais facil de acompanhar */
+.projects-grid{gap:18px}
+.project-card{grid-template-columns:112px minmax(0,1fr);gap:19px;align-items:start;padding:18px;border-radius:13px;background:rgba(7,4,13,.72);border-color:rgba(158,65,255,.32)}
+.project-card:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(0,0,0,.24),0 0 15px rgba(145,0,255,.12)}
+.project-image,.project-placeholder{width:112px;height:108px;border-radius:10px}
+.project-content h3{font-size:16px;line-height:1.45;margin-bottom:9px}
+.project-content p{font-size:13px;line-height:1.75;color:#cbbdd8}
+.project-technologies{gap:7px;margin:12px 0}
+.project-technologies span{font-size:10px;padding:5px 8px;border-radius:5px}
+.project-links{gap:18px;margin-top:10px;flex-wrap:wrap}
+.project-links a,.repository-link{font-size:12px;line-height:1.7}
+.project-counter{margin-top:18px;line-height:1.7}
+.repository-card{padding:19px;border-radius:12px;line-height:1.7}
+.repository-card h3{font-size:15px;line-height:1.5}
+.repository-card p{font-size:13px;line-height:1.75;color:#cbbdd8}
+.repository-details{font-size:11px;line-height:1.7;gap:8px 14px}
+.repositories-grid{gap:15px}
+
+/* Botoes e links com area de clique mais clara */
+.social-featured{gap:12px}
+.social-featured a{border-radius:10px;min-height:56px}
+.section-link{font-size:11px;letter-spacing:0;line-height:1.6}
+.btn{border-radius:8px;clip-path:none;line-height:1.5}
+footer{margin-top:8px;padding:25px 5px 34px;line-height:1.8;letter-spacing:.5px}
+
+/* Ajustes para telas menores */
+@media(max-width:760px){
+  .wrap{width:min(100% - 28px,620px)}
+  .hero{min-height:310px;padding:48px 8px}
+  .hero-copy{max-width:66%}
+  .hero h1{font-size:clamp(39px,10vw,62px);letter-spacing:-2px}
+  .panel{padding:23px 19px;border-radius:14px}
+  .social-hub{padding:21px 18px}
+  .panel-title{align-items:flex-start;gap:10px;flex-wrap:wrap}
+  .panel-title h2{font-size:17px}
+  .slashes{display:none}
+  .about-panel>p,.repo-panel p,.contact-panel p{font-size:14px;line-height:1.85}
+  .projects-grid{grid-template-columns:1fr}
+  .project-card{grid-template-columns:88px minmax(0,1fr);gap:14px;padding:14px}
+  .project-image,.project-placeholder{width:88px;height:88px}
+  .project-content h3{font-size:14px}
+  .project-content p{font-size:12px;line-height:1.7}
+  .section-link{white-space:normal;margin-left:0;width:100%}
+  .repo-panel,.contact-panel{align-items:flex-start;gap:15px}
+  .repo-symbol,.mail-symbol{width:48px;height:48px;font-size:25px}
+}
+@media(max-width:420px){
+  .hero-copy{max-width:72%}
+  .hero-art{right:-18%;width:64%;opacity:.75}
+  .avatar-frame{right:4%;width:clamp(112px,32vw,145px)}
+  .hero-ring{right:calc(4% - 12px);width:clamp(140px,39vw,175px);height:clamp(140px,39vw,175px)}
+  .project-card{grid-template-columns:1fr}
+  .project-image,.project-placeholder{width:100%;height:145px}
+  .social-heading{flex-wrap:wrap}
+  .social-heading small{margin-left:0;width:100%}
+}
