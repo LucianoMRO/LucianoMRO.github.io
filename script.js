@@ -1,169 +1,141 @@
-
-/* =====================================
-   PROJETOS DO PORTFÓLIO
-===================================== */
-
 const projects = [
   {
     name: "Climatech",
-
-    description:
-      "Aplicação de clima com previsão meteorológica, pesquisa de cidades e interface dinâmica.",
-
+    category: "CLIMA & TECNOLOGIA",
+    description: "Aplicação de clima com previsão meteorológica, pesquisa de cidades e interface dinâmica.",
     image: "assets/images/climatech.png",
-
-    technologies: [
-      "HTML",
-      "CSS",
-      "JavaScript",
-      "React"
-    ],
-
+    imageAlt: "Prévia do projeto Climatech",
+    technologies: ["HTML", "CSS", "JavaScript", "React"],
     github: "https://github.com/LucianoMRO/CLIMATECH",
-
     demo: ""
   },
-
   {
     name: "Travel Tech",
-
-    description:
-      "Projeto voltado à tecnologia e experiências digitais para viagens.",
-
-    image: "assets/images/travel-tech.png",
-
-    technologies: [
-      "HTML",
-      "CSS",
-      "JavaScript"
-    ],
-
-    github: "https://github.com/LucianoMRO/traveltech"
-
+    category: "EXPERIÊNCIA DIGITAL",
+    description: "Projeto voltado à tecnologia e a experiências digitais para quem gosta de explorar novos destinos.",
+    image: "assets/images/travel-tech.svg",
+    imageAlt: "Ilustração do projeto Travel Tech",
+    technologies: ["HTML", "CSS", "JavaScript"],
+    github: "https://github.com/LucianoMRO/traveltech",
     demo: ""
   }
 ];
 
-/* =====================================
-   RENDERIZAÇÃO DOS PROJETOS
-===================================== */
+const projectsContainer = document.querySelector("#projects-container");
 
-const projectsContainer = document.querySelector(
-  "#projects-container"
-);
+function createProjectCard(project, index) {
+  const card = document.createElement("article");
+  card.className = "project-card reveal";
+  card.style.setProperty("--card-index", index);
 
-function renderProjects() {
+  const media = document.createElement("div");
+  media.className = "project-media";
+  const image = document.createElement("img");
+  image.src = project.image;
+  image.alt = project.imageAlt;
+  image.loading = "lazy";
+  image.decoding = "async";
+  image.onerror = () => {
+    image.remove();
+    media.classList.add("project-media-fallback");
+    const fallback = document.createElement("span");
+    fallback.textContent = project.name === "Climatech" ? "CLIMATECH" : "TRAVEL TECH";
+    media.append(fallback);
+  };
+  media.append(image);
 
-  if (!projectsContainer) return;
+  const body = document.createElement("div");
+  body.className = "project-body";
+  const top = document.createElement("div");
+  top.className = "project-topline";
+  const category = document.createElement("span");
+  category.textContent = project.category;
+  const number = document.createElement("span");
+  number.textContent = `0${index + 1}`;
+  top.append(category, number);
 
-  const fragment = document.createDocumentFragment();
+  const title = document.createElement("h3");
+  title.textContent = project.name;
+  const description = document.createElement("p");
+  description.textContent = project.description;
 
-  projects.forEach((project) => {
-
-    const card = document.createElement("article");
-    card.className = "project-card";
-
-    // Imagem
-    const image = document.createElement("img");
-
-    image.className = "project-image";
-    image.src = project.image;
-    image.alt = `Imagem do projeto ${project.name}`;
-    image.loading = "lazy";
-    image.decoding = "async";
-
-    image.addEventListener("error", () => {
-      image.style.display = "none";
-    });
-
-    // Conteúdo
-    const content = document.createElement("div");
-    content.className = "project-content";
-
-    const title = document.createElement("h3");
-    title.textContent = project.name;
-
-    const description = document.createElement("p");
-    description.textContent = project.description;
-
-    // Tecnologias
-    const technologies = document.createElement("div");
-    technologies.className = "project-technologies";
-
-    project.technologies.forEach((technology) => {
-
-      const tag = document.createElement("span");
-
-      tag.textContent = technology;
-
-      technologies.appendChild(tag);
-
-    });
-
-    // Links
-    const links = document.createElement("div");
-    links.className = "project-links";
-
-    const githubLink = document.createElement("a");
-
-    githubLink.href = project.github;
-    githubLink.target = "_blank";
-    githubLink.rel = "noopener noreferrer";
-    githubLink.textContent = "GitHub ↗";
-
-    links.appendChild(githubLink);
-
-    if (project.demo) {
-
-      const demoLink = document.createElement("a");
-
-      demoLink.href = project.demo;
-      demoLink.target = "_blank";
-      demoLink.rel = "noopener noreferrer";
-      demoLink.textContent = "Visualizar ↗";
-
-      links.appendChild(demoLink);
-
-    }
-
-    content.append(
-      title,
-      description,
-      technologies,
-      links
-    );
-
-    card.append(
-      image,
-      content
-    );
-
-    fragment.appendChild(card);
-
+  const tags = document.createElement("div");
+  tags.className = "project-tags";
+  project.technologies.forEach((tech) => {
+    const tag = document.createElement("span");
+    tag.textContent = tech;
+    tags.append(tag);
   });
 
-  projectsContainer.appendChild(fragment);
-
-  const projectCount = document.querySelector("#project-count");
-
-  if (projectCount) {
-    projectCount.textContent = projects.length;
+  const links = document.createElement("div");
+  links.className = "project-links";
+  const github = document.createElement("a");
+  github.href = project.github;
+  github.target = "_blank";
+  github.rel = "noopener noreferrer";
+  github.textContent = "Código no GitHub ↗";
+  links.append(github);
+  if (project.demo) {
+    const demo = document.createElement("a");
+    demo.href = project.demo;
+    demo.target = "_blank";
+    demo.rel = "noopener noreferrer";
+    demo.textContent = "Ver projeto ↗";
+    links.append(demo);
   }
 
+  body.append(top, title, description, tags, links);
+  card.append(media, body);
+  return card;
 }
 
-/* =====================================
-   ANO AUTOMÁTICO
-===================================== */
-
-const currentYear = document.querySelector("#current-year");
-
-if (currentYear) {
-  currentYear.textContent = new Date().getFullYear();
+if (projectsContainer) {
+  projects.forEach((project, index) => projectsContainer.append(createProjectCard(project, index)));
+  document.querySelector("#project-count").textContent = projects.length;
 }
 
-/* =====================================
-   INICIALIZAÇÃO
-===================================== */
+const year = document.querySelector("#current-year");
+if (year) year.textContent = new Date().getFullYear();
 
-renderProjects();
+const menuToggle = document.querySelector("#menu-toggle");
+const navLinks = document.querySelector("#nav-links");
+
+function closeMenu() {
+  menuToggle?.setAttribute("aria-expanded", "false");
+  menuToggle?.setAttribute("aria-label", "Abrir menu");
+  navLinks?.classList.remove("is-open");
+  document.body.classList.remove("menu-open");
+}
+
+menuToggle?.addEventListener("click", () => {
+  const isOpen = menuToggle.getAttribute("aria-expanded") === "true";
+  menuToggle.setAttribute("aria-expanded", String(!isOpen));
+  menuToggle.setAttribute("aria-label", isOpen ? "Abrir menu" : "Fechar menu");
+  navLinks.classList.toggle("is-open", !isOpen);
+  document.body.classList.toggle("menu-open", !isOpen);
+});
+navLinks?.querySelectorAll("a").forEach((link) => link.addEventListener("click", closeMenu));
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape") closeMenu();
+});
+
+const backToTop = document.querySelector("#back-to-top");
+window.addEventListener("scroll", () => {
+  backToTop?.classList.toggle("is-visible", window.scrollY > 500);
+}, { passive: true });
+backToTop?.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
+
+const revealItems = document.querySelectorAll(".reveal");
+if ("IntersectionObserver" in window && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+  const observer = new IntersectionObserver((entries, currentObserver) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("is-visible");
+        currentObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  revealItems.forEach((item) => observer.observe(item));
+} else {
+  revealItems.forEach((item) => item.classList.add("is-visible"));
+}
