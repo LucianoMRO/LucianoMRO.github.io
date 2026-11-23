@@ -82,3 +82,13 @@ body:after{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;opaci
   .avatar-frame{right:8%;width:clamp(125px,34vw,190px)}
   .hero-ring{right:calc(8% - 15px);width:clamp(155px,41vw,220px);height:clamp(155px,41vw,220px)}
 }
+
+/* Garante que a foto de perfil fique totalmente circular */
+.avatar-frame{
+  border-radius:50% !important;
+  overflow:hidden;
+}
+.github-avatar{
+  border-radius:50% !important;
+  clip-path:circle(50% at 50% 50%);
+}
